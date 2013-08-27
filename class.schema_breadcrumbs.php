@@ -1,4 +1,13 @@
 <?php
+/*
+ * Script Name:		Schema.org Breadcrumbs for WordPress SEO
+ * Contributors:	Felix Arntz (@felixarntz / leaves-and-love.net)
+ * Description:		This class modifies the WordPress SEO plugin by Yoast to use valid Schema.org markup for breadcrumbs instead of the RDFa.
+ * Version:			1.0
+ * License:			GNU General Public License
+ * License URI:		http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ */
+ 
 /**
  * This class modifies the breadcrumbs from the WordPress SEO plugin by Yoast to use Schema.org markup instead of RDFa.
  * Include and instantiate it in your theme or plugin like this:
@@ -20,8 +29,13 @@
  * - 'wpseo_breadcrumb_single_link'
  * - 'wpseo_breadcrumb_output'
  * 
- * @link http://yoast.com/wordpress/seo/
+ * This class will not do anything if the WordPress SEO plugin is not installed:
+ * http://yoast.com/wordpress/seo/
+ * 
+ * @package WPSEO_SchemaBreadcrumbs
+ * @version 1.0
  * @author Felix Arntz <felix-arntz@leaves-and-love.net>
+ * 
  */
 class Schema_Breadcrumbs
 {
