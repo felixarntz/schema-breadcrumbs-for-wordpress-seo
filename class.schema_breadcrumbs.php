@@ -155,4 +155,3 @@ class Schema_Breadcrumbs
 		return $output;
 	}
 }
-?>
