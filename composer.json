@@ -1,0 +1,8 @@
+{
+  "name": "felixarntz/Schema-Breadcrumbs-for-WordPress-SEO",
+  "description": "This class modifies the WordPress SEO plugin by Yoast to use valid Schema.org markup for breadcrumbs instead of the RDFa.",
+  "version": "1.2.0",
+  "require": {
+    "php": ">=5.3.0"
+  }
+}
