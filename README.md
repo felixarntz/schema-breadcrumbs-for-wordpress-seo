@@ -44,5 +44,5 @@ Check out the WordPress SEO plugin repository on GitHub:
 Find out more about Schema.org markup:
 * [schema.org](http://schema.org/)
 
-Join the discussion about using Schema.org markup in the WordPress SEO plugin:
-* [Add schema.org markup](https://github.com/Yoast/wordpress-seo/issues/179)
+This project is now on Packagist, require it with Composer:
+* [Packagist Package](https://packagist.org/packages/felixarntz/schema-breadcrumbs-for-wordpress-seo)
