@@ -3,22 +3,20 @@
  * Script Name:   Schema.org Breadcrumbs for WordPress SEO
  * Contributors:  Felix Arntz (@felixarntz / leaves-and-love.net)
  * Description:   This class modifies the WordPress SEO plugin by Yoast to use valid Schema.org markup for breadcrumbs instead of the RDFa.
- * Version:       1.1
+ * Version:       1.2.0
  * License:       GNU General Public License
  * License URI:   http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
  */
  
 /**
  * This class modifies the breadcrumbs from the WordPress SEO plugin by Yoast to use Schema.org markup instead of RDFa.
- * Include and instantiate it in your theme or plugin like this:
- * <code>$schema_breadcrumbs = null;
- * 
- * function yourtheme_instantiate_class()
+ * It uses a singleton pattern so that it can only be instantiated once.
+ * Simply include this file in your plugin or theme and enable the class, for example like this:
+ * <code>function yourtheme_instantiate_class()
  * {
- *    global $schema_breadcrumbs;
  *    if( function_exists( 'yoast_breadcrumb' ) )
  *    {
- *      $schema_breadcrumbs = new Schema_Breadcrumbs();
+ *      Schema_Breadcrumbs::instance();
  *    }
  * }
  * add_action( 'after_setup_theme', 'yourtheme_instantiate_class' );</code>
@@ -33,23 +31,39 @@
  * http://yoast.com/wordpress/seo/
  * 
  * @package WPSEO_SchemaBreadcrumbs
- * @version 1.1
+ * @version 1.2.0
  * @author Felix Arntz <felix-arntz@leaves-and-love.net>
  * 
  */
 class Schema_Breadcrumbs
 {
+  private static $instance = null;
+
   private $breadcrumb_link_counter = 0;
   
   private $breadcrumb_element_wrapper = 'span';
   private $breadcrumb_output_wrapper = 'span';
+
+  /**
+   * Singleton Pattern
+   * 
+   * @return Schema_Breadcrumbs instance of the class
+   */
+  public static function instance()
+  {
+    if( self::$instance === null )
+    {
+      self::$instance = new self;
+    }
+    return self::$instance;
+  }
   
   /**
    * Constructor of the class
    * 
    * Adds the modifying functions to the four WordPress SEO plugin filters.
    */
-  public function __construct()
+  private function __construct()
   {
     add_filter( 'wpseo_breadcrumb_single_link_wrapper', array( $this, 'breadcrumb_element_wrapper' ), 95 );
     add_filter( 'wpseo_breadcrumb_output_wrapper', array( $this, 'breadcrumb_output_wrapper' ), 95 );
@@ -111,11 +125,11 @@ class Schema_Breadcrumbs
     else
     {
       $opt = array();
-      if( class_exists( 'WPSEO_Options' ) )
+      if( class_exists( 'WPSEO_Options' ) ) // WPSEO >= 1.5
       {
         $opt = WPSEO_Options::get_all();
       }
-      else
+      else // WPSEO < 1.5
       {
         $opt = get_wpseo_options();
       }

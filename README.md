@@ -1,6 +1,8 @@
 Schema.org Breadcrumbs for WordPress SEO
 ========================================
 
+[![endorse](https://api.coderwall.com/felixarntz/endorsecount.png)](https://coderwall.com/felixarntz)
+
 With this class the WordPress SEO breadcrumbs will use valid Schema.org markup.
 
 This class will not have any function if the plugin WordPress SEO by Yoast is not activated on the current WordPress installation.
@@ -16,22 +18,19 @@ The filters used by the class are:
 Usage of the class
 ==================
 
-Simply include the class in your theme or plugin. You should then instantiate a global object like this:
+As of version 1.2.0, the class uses a singleton pattern so that it can only be instantiated once. Simply include the class file in your theme or plugin. You can then enable it, for example, like this:
 ```php
-$schema_breadcrumbs = null;
-
 function yourtheme_instantiate_class()
 {
-	global $schema_breadcrumbs;
-	
-	// only instantiate the class if Yoast breadcrumbs are used
-	if( function_exists( 'yoast_breadcrumb' ) )
-	{
-		$schema_breadcrumbs = new Schema_Breadcrumbs();
-	}
+  // only instantiate the class if Yoast breadcrumbs are used
+  if( function_exists( 'yoast_breadcrumb' ) )
+  {
+    Schema_Breadcrumbs::instance();
+  }
 }
 add_action( 'after_setup_theme', 'yourtheme_instantiate_class' );
 ```
+You do not need to do anything more than instantiating the class, it will then work by itself.
 
 Additional Information
 ======================
