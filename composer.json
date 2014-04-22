@@ -2,6 +2,21 @@
   "name": "felixarntz/schema-breadcrumbs-for-wordpress-seo",
   "description": "This class modifies the WordPress SEO plugin by Yoast to use valid Schema.org markup for breadcrumbs instead of the RDFa.",
   "version": "1.2.1",
+  "license": "GPL-2.0+",
+  "keywords": ["wordpress", "wordpress-seo", "schema.org", "breadcrumbs"],
+  "homepage": "https://github.com/felixarntz/schema-breadcrumbs-for-wordpress-seo",
+  "authors": [
+    {
+      "name": "Felix Arntz",
+      "email": "felix-arntz@leaves-and-love.net",
+      "homepage": "http://leaves-and-love.net",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "felix-arntz@leaves-and-love.net",
+    "issues": "https://github.com/felixarntz/schema-breadcrumbs-for-wordpress-seo/issues"
+  },
   "require": {
     "php": ">=5.3.0"
   }
