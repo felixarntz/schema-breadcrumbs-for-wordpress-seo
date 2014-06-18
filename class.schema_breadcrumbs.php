@@ -3,7 +3,7 @@
  * Script Name:   Schema.org Breadcrumbs for WordPress SEO
  * Contributors:  Felix Arntz (@felixarntz / leaves-and-love.net)
  * Description:   This class modifies the WordPress SEO plugin by Yoast to use valid Schema.org markup for breadcrumbs instead of the RDFa.
- * Version:       1.2.1
+ * Version:       1.2.2
  * License:       GNU General Public License
  * License URI:   http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
  */
@@ -31,7 +31,7 @@
  * http://yoast.com/wordpress/seo/
  * 
  * @package WPSEO_SchemaBreadcrumbs
- * @version 1.2.1
+ * @version 1.2.2
  * @author Felix Arntz <felix-arntz@leaves-and-love.net>
  * 
  */
@@ -160,7 +160,12 @@ class Schema_Breadcrumbs
    */
   public function modify_breadcrumb_output( $full_output )
   {
-    $full_output = str_replace( ' xmlns:v="http://rdf.data-vocabulary.org/#"', ' itemprop="breadcrumb" itemscope="itemscope" itemtype="http://schema.org/Breadcrumb"', $full_output );
+    $string_to_replace = ' prefix="v: http://rdf.data-vocabulary.org/#"';
+    if( version_compare( WPSEO_VERSION, '1.5.3.3', '<' ) )
+    {
+      $string_to_replace = ' xmlns:v="http://rdf.data-vocabulary.org/#"';
+    }
+    $full_output = str_replace( $string_to_replace, ' itemprop="breadcrumb" itemscope="itemscope" itemtype="http://schema.org/Breadcrumb"', $full_output );
     
     $end_offset = strlen( $this->breadcrumb_output_wrapper ) + 3;
     $offset = strlen( $full_output ) - $end_offset;
