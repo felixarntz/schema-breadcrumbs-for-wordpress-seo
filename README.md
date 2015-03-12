@@ -10,8 +10,6 @@ Furthermore breadcrumbs have to be enabled in the plugin settings.
 
 However, adding this class won't break anything since all the changes are made using filters from the WordPress SEO plugin.
 The filters used by the class are:
-* 'wpseo_breadcrumb_single_link_wrapper'
-* 'wpseo_breadcrumb_output_wrapper'
 * 'wpseo_breadcrumb_single_link'
 * 'wpseo_breadcrumb_output'
 
