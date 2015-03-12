@@ -3,7 +3,7 @@
  * Script Name:   Schema.org Breadcrumbs for WordPress SEO
  * Contributors:  Felix Arntz (@felixarntz / leaves-and-love.net)
  * Description:   This class modifies the WordPress SEO plugin by Yoast to use valid Schema.org markup for breadcrumbs instead of the RDFa.
- * Version:       1.2.2
+ * Version:       1.3.0
  * License:       GNU General Public License
  * License URI:   http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
  */
@@ -31,7 +31,7 @@
  * http://yoast.com/wordpress/seo/
  * 
  * @package WPSEO_SchemaBreadcrumbs
- * @version 1.2.2
+ * @version 1.3.0
  * @author Felix Arntz <felix-arntz@leaves-and-love.net>
  * 
  */
@@ -113,14 +113,10 @@ class Schema_Breadcrumbs
   public function modify_breadcrumb_element( $link_output, $link )
   {
     $output = '';
-    if( $this->breadcrumb_link_counter > 0 )
-    {
-      $output .= '<' . $this->breadcrumb_element_wrapper . ' itemprop="child" itemscope="itemscope" itemtype="http://schema.org/Breadcrumb">';
-    }
     
     if( isset( $link['url'] ) && substr_count( $link_output, 'rel="v:url"' ) > 0 )
     {
-      $output .= '<a href="' . esc_attr( $link['url'] ) . '" itemprop="url"><span itemprop="title">' . $link['text'] . '</span></a>';
+      $output .= '<a href="' . esc_attr( $link['url'] ) . '"><span itemprop="itemListElement">' . $link['text'] . '</span></a>';
     }
     else
     {
@@ -135,13 +131,14 @@ class Schema_Breadcrumbs
       }
       if( isset( $opt['breadcrumbs-boldlast'] ) && $opt['breadcrumbs-boldlast'] )
       {
-        $output .= '<strong class="breadcrumb_last" itemprop="title">' . $link['text'] . '</strong>';
+        $output .= '<strong class="breadcrumb_last" itemprop="itemListElement">' . $link['text'] . '</strong>';
       }
       else
       {
-        $output .= '<span class="breadcrumb_last" itemprop="title">' . $link['text'] . '</span>';
+        $output .= '<span class="breadcrumb_last" itemprop="itemListElement">' . $link['text'] . '</span>';
       }
     }
+
     $this->breadcrumb_link_counter++;
     
     return $output;
@@ -165,19 +162,7 @@ class Schema_Breadcrumbs
     {
       $string_to_replace = ' xmlns:v="http://rdf.data-vocabulary.org/#"';
     }
-    $full_output = str_replace( $string_to_replace, ' itemprop="breadcrumb" itemscope="itemscope" itemtype="http://schema.org/Breadcrumb"', $full_output );
-    
-    $end_offset = strlen( $this->breadcrumb_output_wrapper ) + 3;
-    $offset = strlen( $full_output ) - $end_offset;
-    
-    $output = substr( $full_output, 0, $offset );
-    
-    for( $i = 0; $i < $this->breadcrumb_link_counter - 1; $i++ )
-    {
-      $output .= '</' . $this->breadcrumb_element_wrapper . '>';
-    }
-    
-    $output .= substr( $full_output, $offset, $end_offset );
+    $output = str_replace( $string_to_replace, ' itemprop="breadcrumb" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList"', $full_output );
     
     return $output;
   }
