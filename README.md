@@ -1,7 +1,7 @@
 Schema.org Breadcrumbs for WordPress SEO
 ========================================
 
-[![endorse](https://api.coderwall.com/felixarntz/endorsecount.png)](https://coderwall.com/felixarntz)
+[![endorse](https://coderwall-assets-0.s3.amazonaws.com/uploads/user/avatar/105962/IMG_4758quadrat.jpg)](https://coderwall.com/felixarntz)
 
 With this class the WordPress SEO breadcrumbs will use valid Schema.org markup.
 

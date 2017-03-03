@@ -122,7 +122,7 @@ class Schema_Breadcrumbs
   public function modify_breadcrumb_output( $full_output )
   {
     $string_to_replace = ' prefix="v: http://rdf.data-vocabulary.org/#"';
-    if( version_compare( WPSEO_VERSION, '1.5.3.3', '<' ) )
+    if( version_compare( WPSEO_VERSION, '1.5.3.3', '>' ) )
     {
       $string_to_replace = ' xmlns:v="http://rdf.data-vocabulary.org/#"';
     }
